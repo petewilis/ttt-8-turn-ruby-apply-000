@@ -4,7 +4,9 @@ describe './lib/turn.rb' do
 
   describe '#display_board' do
     it 'prints arbitrary arrangements of the board' do
-      board = ["X", "X", "X", "X", "O", "O", "X", "O", "O"]
+      board = ["X", "X", "X", 
+              "X", "O", "O",
+              "X", "O", "O"]
 
       output = capture_puts{ display_board(board) }
 

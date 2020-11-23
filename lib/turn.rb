@@ -1,58 +1,44 @@
-
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-
 def display_board(board)
-   puts " #{board[0]} | #{board[1]} | #{board[2]} "
-   puts "-----------"
-   puts " #{board[3]} | #{board[4]} | #{board[5]} "
-   puts "-----------"
-   puts " #{board[6]} | #{board[7]} | #{board[8]} "
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
-
-
 
 def input_to_index(user_input)
   user_input.to_i - 1
 end
 
-
-
 def valid_move?(board, index)
-  if index.between?(0,8) && !position_taken?(board, index)
-      return true
-   end
+  if index.between?(0,8)
+    if !position_taken?(board, index)
+      true
+    end
+  end
+
 end
 
-
-
-def position_taken?(board, index)
-  if (board[index] == " ") || (board[index] == "") || (board[index] == nil)
-    return false
-  elsif board[index] == "X" || board[index] == "O"
-      taken = true
+def turn(board)
+  puts "Please enter 1-9:"
+  user_input = gets.strip
+  taco = input_to_index(user_input)
+  if valid_move?(board, taco)
+    move(board, taco)
+    display_board(board)
+    puts 'valid move was true'
+  else
+    turn(board)
+    puts 'valid move was false'
   end
 end
 
-
-
-
-
-def move(board, index, player = "X")
-  board[index] = player
+def position_taken?(board, index)
+  board[index] != " "
 end
 
 
 
-
-def turn(board)
-puts "Please enter 1-9:"
-   user_input = gets.strip
-   input_to_index(user_input)
-  if valid_move?(board, 0 )
-    position_taken?(board, 0 )
-    move(board, 0)
-    display_board(board)
-  else
-    turn(board)
-end
+def move(board, index, current_player = "X")
+  board[index] = current_player
 end
